@@ -1,0 +1,380 @@
+[
+    {
+        "label": "SQL",
+        "importPath": "cs50",
+        "description": "cs50",
+        "isExtraImport": true,
+        "detail": "cs50",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "flask_session",
+        "description": "flask_session",
+        "isExtraImport": true,
+        "detail": "flask_session",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "apology",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "lookup",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "usd",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "pytz",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytz",
+        "description": "pytz",
+        "detail": "pytz",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "urllib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "urllib",
+        "description": "urllib",
+        "detail": "urllib",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "wraps",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "after_request",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def after_request(response):\n    \"\"\"Ensure responses aren't cached\"\"\"\n    response.headers[\"Cache-Control\"] = \"no-cache, no-store, must-revalidate\"\n    response.headers[\"Expires\"] = 0\n    response.headers[\"Pragma\"] = \"no-cache\"\n    return response\n@app.route(\"/\")\n@login_required\ndef index():\n    \"\"\"Show portfolio of stocks\"\"\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    \"\"\"Show portfolio of stocks\"\"\"\n    symbols, shares, prices, averages, current = [],[],[],[],[]\n    data = db.execute(\"SELECT * FROM users WHERE id = ?\", session[\"user_id\"])\n    name = data[0][\"username\"]\n    cash = data[0][\"cash\"]\n    table1 = db.execute(\"SELECT symbol, SUM(shares) FROM shares WHERE user_id = ? GROUP BY symbol ORDER BY symbol\", session[\"user_id\"])\n    table2 = db.execute(\"SELECT symbol, shares, price FROM shares WHERE user_id = ? ORDER BY symbol\", session[\"user_id\"])\n    #prices is a list of the total money spent on each stock, in alphabetical order\n    for i in range(len(table2)):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "buy",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def buy():\n    \"\"\"Buy shares of stock\"\"\"\n    if request.method == \"POST\":\n        shares = request.form.get(\"shares\")\n        info = lookup(request.form.get(\"symbol\"))\n        symbol = request.form.get(\"symbol\")\n        if not lookup(symbol):\n            return apology(\"Invalid symbol\", 400)\n        if not shares.isdigit() or int(shares) <= 0:\n            return apology(\"Input a positive integer number of shares\", 400)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "history",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def history():\n    \"\"\"Show history of transactions\"\"\"\n    history = db.execute(\"SELECT * FROM history WHERE user_id = ? ORDER BY date DESC, time DESC\", session[\"user_id\"])\n    iterate = len(history)\n    return render_template(\"history.html\", history=history, iterate=iterate)\n@app.route(\"/login\", methods=[\"GET\", \"POST\"])\ndef login():\n    \"\"\"Log user in\"\"\"\n    # Forget any user_id\n    session.clear()",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def login():\n    \"\"\"Log user in\"\"\"\n    # Forget any user_id\n    session.clear()\n    # User reached route via POST (as by submitting a form via POST)\n    if request.method == \"POST\":\n        # Ensure username was submitted\n        if not request.form.get(\"username\"):\n            return apology(\"must provide username\", 403)\n        # Ensure password was submitted",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def logout():\n    \"\"\"Log user out\"\"\"\n    # Forget any user_id\n    session.clear()\n    # Redirect user to login form\n    return redirect(\"/\")\n@app.route(\"/quote\", methods=[\"GET\", \"POST\"])\n@login_required\ndef quote():\n    \"\"\"Get stock quote.\"\"\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "quote",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def quote():\n    \"\"\"Get stock quote.\"\"\"\n    if request.method == \"POST\":\n        clicker = lookup(request.form.get(\"symbol\"))\n        if not clicker:\n            return apology(\"Invalid symbol\")\n        else:\n            return render_template(\"quoted.html\", clicker=clicker)\n    else:\n        return render_template(\"quote.html\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "register",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def register():\n    \"\"\"Register user\"\"\"\n    if request.method == \"POST\":\n        username = request.form.get(\"username\")\n        password = request.form.get(\"password\")\n        confirm = request.form.get(\"confirmation\")\n        current = db.execute(\"SELECT username FROM users WHERE username = ?\", username)\n        if (not username) or (not password) or (not confirm):\n            return apology(\"Must fill out all fields\", 400)\n        if current:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "sell",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def sell():\n    \"\"\"Sell shares of stock\"\"\"\n    if request.method == \"POST\":\n        symbol = request.form.get(\"symbol\")\n        if not symbol:\n            return apology(\"You can only sell a share that you own\", 400)\n        count = request.form.get(\"shares\")\n        if not count.isdigit() or int(count) <= 0:\n            return apology(\"Input a positive integer number of shares to sell\", 400)\n        balance = db.execute(\"SELECT SUM(shares) FROM shares WHERE user_id = ? AND symbol = ? GROUP BY symbol;\",",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "manage",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def manage():\n    if request.method == \"GET\":\n        return render_template(\"manage.html\")\n    else:\n        balance = db.execute(\"SELECT cash FROM users WHERE id = ?\", session[\"user_id\"])\n        balance = balance[0][\"cash\"]\n        action = request.form.get(\"action\")\n        amount = request.form.get(\"amount\")\n        time = datetime.now()\n        if not amount.replace(\".\", \"\").isnumeric():",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "change",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def change():\n    if request.method == \"POST\":\n        password = request.form.get(\"password\")\n        confirm = request.form.get(\"confirmation\")\n        if (not password) or (not confirm):\n            return apology(\"Must fill out all fields\", 400)\n        if password != confirm:\n            return apology(\"Passwords do not match\", 400)\n        hash = generate_password_hash(password)\n        db.execute(\"UPDATE users SET hash = ? WHERE id = ?\", hash, session[\"user_id\"])",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\n# Custom filter\napp.jinja_env.filters[\"usd\"] = usd\n# Configure session to use filesystem (instead of signed cookies)\napp.config[\"SESSION_PERMANENT\"] = False\napp.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n# Configure CS50 Library to use SQLite database\ndb = SQL(\"sqlite:///finance.db\")\n@app.after_request",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.jinja_env.filters[\"usd\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.jinja_env.filters[\"usd\"] = usd\n# Configure session to use filesystem (instead of signed cookies)\napp.config[\"SESSION_PERMANENT\"] = False\napp.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n# Configure CS50 Library to use SQLite database\ndb = SQL(\"sqlite:///finance.db\")\n@app.after_request\ndef after_request(response):\n    \"\"\"Ensure responses aren't cached\"\"\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SESSION_PERMANENT\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SESSION_PERMANENT\"] = False\napp.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n# Configure CS50 Library to use SQLite database\ndb = SQL(\"sqlite:///finance.db\")\n@app.after_request\ndef after_request(response):\n    \"\"\"Ensure responses aren't cached\"\"\"\n    response.headers[\"Cache-Control\"] = \"no-cache, no-store, must-revalidate\"\n    response.headers[\"Expires\"] = 0",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SESSION_TYPE\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n# Configure CS50 Library to use SQLite database\ndb = SQL(\"sqlite:///finance.db\")\n@app.after_request\ndef after_request(response):\n    \"\"\"Ensure responses aren't cached\"\"\"\n    response.headers[\"Cache-Control\"] = \"no-cache, no-store, must-revalidate\"\n    response.headers[\"Expires\"] = 0\n    response.headers[\"Pragma\"] = \"no-cache\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "db = SQL(\"sqlite:///finance.db\")\n@app.after_request\ndef after_request(response):\n    \"\"\"Ensure responses aren't cached\"\"\"\n    response.headers[\"Cache-Control\"] = \"no-cache, no-store, must-revalidate\"\n    response.headers[\"Expires\"] = 0\n    response.headers[\"Pragma\"] = \"no-cache\"\n    return response\n@app.route(\"/\")\n@login_required",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "apology",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def apology(message, code=400): # default value for code is 400\n    \"\"\"Render message as an apology to user.\"\"\"\n    def escape(s):\n        \"\"\"\n        Escape special characters.\n        https://github.com/jacebrowning/memegen#special-characters\n        \"\"\"\n        for old, new in [(\"-\", \"--\"), (\" \", \"-\"), (\"_\", \"__\"), (\"?\", \"~q\"),\n                         (\"%\", \"~p\"), (\"#\", \"~h\"), (\"/\", \"~s\"), (\"\\\"\", \"''\")]:\n            s = s.replace(old, new)",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def login_required(f):\n    \"\"\"\n    Decorate routes to require login.\n    http://flask.pocoo.org/docs/0.12/patterns/viewdecorators/\n    \"\"\"\n    @wraps(f)\n    def decorated_function(*args, **kwargs):\n        if session.get(\"user_id\") is None:\n            return redirect(\"/login\")\n        return f(*args, **kwargs)",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "lookup",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def lookup(symbol):\n    \"\"\"Look up quote for symbol.\"\"\"\n    # Prepare API request\n    symbol = symbol.upper()\n    end = datetime.datetime.now(pytz.timezone(\"US/Eastern\"))\n    start = end - datetime.timedelta(days=7)\n    # Yahoo Finance API\n    url = (\n        f\"https://query1.finance.yahoo.com/v7/finance/download/{urllib.parse.quote_plus(symbol)}\"\n        f\"?period1={int(start.timestamp())}\"",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "usd",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def usd(value):\n    \"\"\"Format value as USD.\"\"\"\n    return f\"${value:,.2f}\"",
+        "detail": "helpers",
+        "documentation": {}
+    }
+]

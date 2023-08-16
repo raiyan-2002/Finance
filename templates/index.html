@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Holdings
+{% endblock %}
+
+{% block main %}
+    <h1>{{name}}'s Holdings</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Average Purchace Price</th>
+                <th>Current Price</th>
+                <th>Average Return</th>
+                <th>Total Return</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(iterate) %}
+            <tr>
+                <td>{{symbols[i]}}</td>
+                <td>{{shares[i] | int}}</td>
+                <td>{{averages[i] | usd}}</td>
+                <td>{{current[i].price | usd}}</td>
+
+                {% if current[i].price == averages[i] %}
+                    <td>{{ 0 | usd}}</td>
+                {% elif current[i].price > averages[i] %}
+                    <td class = "green">+{{(current[i].price - averages[i]) | usd}} (+{{(100 * (current[i].price - averages[i]) / averages[i]) | round (2)}}%) </td>
+                {% else %}
+                    <td class = "red">-{{(averages[i] - current[i].price) | usd}}  (-{{(100 * (averages[i] - current[i].price) / averages[i]) | round(2)}}%) </td>
+                {% endif %}
+
+                {% if current[i].price == averages[i] %}
+                    <td>{{ 0 | usd}}</td>
+                {% elif current[i].price > averages[i] %}
+                    <td class = "green">+{{((current[i].price - averages[i]) * shares[i]) | usd}}</td>
+                {% else %}
+                    <td class = "red">-{{((averages[i] - current[i].price) * shares[i]) | usd}}</td>
+                {% endif %}
+
+                <td>{{(current[i].price * shares[i]) | usd}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Net Investments</b></td>
+                <td>{{invested | usd}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Investment Value</b></td>
+                <td>{{value | usd}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Net Return</b></td>
+                {% if value == invested %}
+                    <td>{{ 0 | usd}}</td>
+                {% elif value > invested %}
+                    <td class = "green">+{{ (value - invested) | usd}} (+{{(100 * (value - invested) / invested) | round (2)}}%)</td>
+                {% else %}
+                    <td class = "red">-{{(invested - value) | usd}} (-{{(100 * (invested - value) / invested) | round (2)}}%)</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Cash</b></td>
+                <td>{{cash | usd}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>TOTAL</b></td>
+                <td>{{(cash + value) | usd}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1>Transaction History</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Transation</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(iterate) %}
+
+                <tr>
+
+                {% if history[i]["trans"] == "Withdraw" or history[i]["trans"] == "Deposit" %}
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{history[i]["price"] | usd}}</td>
+
+
+                {% else %}
+                    <td>{{history[i]["symbol"]}}</td>
+                    <td>{{history[i]["shares"]}}</td>
+                    <td>{{history[i]["price"] | usd}}</td>
+                    <td>{{(history[i]["shares"] * history[i]["price"]) | usd}}</td>
+
+                {% endif %}
+                    <td>{{history[i]["trans"]}}</td>
+                    <td>{{history[i]["date"]}}</td>
+                    <td>{{history[i]["time"]}}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

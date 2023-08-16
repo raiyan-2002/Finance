@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Manage Funds
+{% endblock %}
+
+{% block main %}
+    <h2>Manage Funds</h2>
+
+    <form action="/manage" method="post">
+        <select class="mb-3 form-control mx-auto w-auto center" id = "action" name = "action">
+            <option disabled selected>Action</option>
+            <option value = "Deposit">Deposit</option>
+            <option value = "Withdraw">Withdraw</option>
+        </select>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="amount" name="amount" placeholder="Amount" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit!</button>
+    </form>
+{% endblock %}

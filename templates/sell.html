@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <h2>Sell a Stock!</h2>
+
+    <form action="/sell" method="post">
+        <select class="mb-3 form-control mx-auto w-auto center" id = "symbol" name = "symbol">
+            <option disabled selected>
+                Symbol
+            </option>
+            {% for i in range(iterate) %}
+            <option value = "{{info[i]}}">
+                {{info[i]}}
+            </option>
+            {% endfor %}
+        </select>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Number" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell!</button>
+    </form>
+{% endblock %}

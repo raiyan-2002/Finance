@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{clicker.name}}
+{% endblock %}
+
+{% block main %}
+    <h2>{{clicker.name}}</h2>
+
+    <p>
+        Price: {{clicker.price | usd}}
+    </p>
+
+{% endblock %}
